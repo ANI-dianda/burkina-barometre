@@ -15,8 +15,8 @@ COPY . .
 # Générer Prisma Client
 RUN npx prisma generate
 
-# Construire l'application
-RUN npm run build
+# Construire l'application avec npx
+RUN npx nest build
 
 # Supprimer les dev dependencies après le build
 RUN npm prune --production
