@@ -15,8 +15,8 @@ COPY . .
 # Générer Prisma Client
 RUN npx prisma generate
 
-# Construire l'application avec npx
-RUN npx nest build
+# Construire l'application avec TypeScript
+RUN npx tsc -p tsconfig.build.json
 
 # Supprimer les dev dependencies après le build
 RUN npm prune --production
