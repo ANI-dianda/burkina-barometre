@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String         @id @default(uuid())
+  phoneNumberHash String         @unique
+  role            Role           @default(CITIZEN)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  avis            Avis[]
+  reponsesAdmin   ReponseAdmin[]
+}
+
+model Administration {
+  id        String          @id @default(uuid())
+  name      String
+  ministry  String?
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  services  ServicePublic[]
+}
+
+model ServicePublic {
+  id               String         @id @default(uuid())
+  name             String
+  type             String
+  address          String
+  currentScore     Float          @default(0)
+  scoreHistory     Json?
+  administrationId String
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  latitude         Float?
+  longitude        Float?
+  avis             Avis[]
+  administration   Administration @relation(fields: [administrationId], references: [id])
+}
+
+model Avis {
+  id               String        @id @default(uuid())
+  ratingAccueil    Int
+  ratingDelai      Int
+  ratingResolution Int
+  comment          String?
+  status           AvisStatus    @default(PENDING)
+  userId           String
+  serviceId        String
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  service          ServicePublic @relation(fields: [serviceId], references: [id])
+  user             User          @relation(fields: [userId], references: [id])
+  reponse          ReponseAdmin?
+
+  @@unique([userId, serviceId], name: "user_service_unique_review")
+}
+
+model ReponseAdmin {
+  id        String   @id @default(uuid())
+  content   String
+  avisId    String   @unique
+  adminId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  admin     User     @relation(fields: [adminId], references: [id])
+  avis      Avis     @relation(fields: [avisId], references: [id])
+}
+
+enum Role {
+  CITIZEN
+  ADMIN
+  MODERATOR
+}
+
+enum AvisStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}

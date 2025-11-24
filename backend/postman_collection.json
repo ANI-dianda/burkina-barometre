@@ -1,0 +1,171 @@
+{
+  "info": {
+    "name": "Burkina-Barometre API",
+    "_postman_id": "burkina-barometre-collection",
+  "description": "Collection générée automatiquement — endpoints principaux (auth, profile, avis, services). Importer et créer un environnement avec la variable `baseUrl` et `token` (mettre le token reçu après /auth/login).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phoneNumber\": \"+22670000000\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth","register"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phoneNumber\": \"+22670000000\",\n  \"otp\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth","login"]
+            }
+          }
+          ,
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// Save access token to environment",
+                  "pm.test('Login returns accessToken', function () {",
+                  "  pm.response.to.have.status(200) || pm.response.to.have.status(201);",
+                  "  var json = pm.response.json();",
+                  "  pm.expect(json.accessToken).to.exist;",
+                  "  pm.environment.set('token', json.accessToken);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Profile",
+      "item": [
+        {
+          "name": "Get my profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/profile/me", "host": ["{{baseUrl}}"], "path": ["profile","me"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Avis",
+      "item": [
+        {
+          "name": "Get all avis",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/avis", "host": ["{{baseUrl}}"], "path": ["avis"] } }
+        },
+        {
+          "name": "Get avis by id",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/avis/:id", "host": ["{{baseUrl}}"], "path": ["avis",":id"] }
+          }
+        },
+        {
+          "name": "Create avis (auth required)",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ratingAccueil\": 5,\n  \"ratingDelai\": 4,\n  \"ratingResolution\": 5,\n  \"comment\": \"Très bon service\",\n  \"serviceId\": \"<service-uuid-here>\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/avis", "host": ["{{baseUrl}}"], "path": ["avis"] }
+          }
+          ,
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Create avis returned 201 and id', function () {",
+                  "  pm.response.to.have.status(201);",
+                  "  var json = pm.response.json();",
+                  "  pm.expect(json.id).to.exist;",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Update avis",
+          "request": {
+            "method": "PATCH",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"comment\": \"Mise à jour du commentaire\"\n}" },
+            "url": { "raw": "{{baseUrl}}/avis/:id", "host": ["{{baseUrl}}"], "path": ["avis",":id"] }
+          }
+        },
+        {
+          "name": "Delete avis",
+          "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/avis/:id", "host": ["{{baseUrl}}"], "path": ["avis",":id"] } }
+        }
+      ]
+    },
+    {
+      "name": "Services",
+      "item": [
+        {
+          "name": "Get all services",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/services", "host": ["{{baseUrl}}"], "path": ["services"] } }
+        },
+        {
+          "name": "Get service by id",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/services/:id", "host": ["{{baseUrl}}"], "path": ["services",":id"] } }
+        },
+        {
+          "name": "Create service",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Service exemple\",\n  \"type\": \"Type\",\n  \"address\": \"Adresse\",\n  \"administrationId\": \"<admin-uuid>\"\n}" },
+            "url": { "raw": "{{baseUrl}}/services", "host": ["{{baseUrl}}"], "path": ["services"] }
+          }
+        }
+      ]
+    }
+  ],
+  "event": [],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000", "description": "Base URL de l'API (ex: http://localhost:3000)" },
+    { "key": "token", "value": "", "description": "JWT obtenu via POST /auth/login" }
+  ]
+}

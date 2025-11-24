@@ -1,0 +1,77 @@
+version: '3.8'
+services:
+  postgres-db:
+    image: postgis/postgis:15-3.3
+    container_name: burkina-barometre-db
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: barometre
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  app:
+    build: .
+    container_name: burkina-barometre-app
+    restart: on-failure
+    depends_on:
+      - postgres-db
+    environment:
+      # This will be used by the app; override with a .env file or env vars in production
+      DATABASE_URL: "postgresql://user:password@postgres-db:5432/barometre?schema=public"
+      JWT_SECRET: "change_me"
+    ports:
+      - '3000:3000'
+    # In dev you may want to mount the source; commented out by default
+    # volumes:
+    #   - ./:/usr/src/app
+    command: ["sh", "-c", "npm install --silent && npm run build && npm run start:prod"]
+
+  # Development service: mounts source and runs Nest in watch mode for local development
+  app-dev:
+    build: .
+    container_name: burkina-barometre-app-dev
+    restart: unless-stopped
+    depends_on:
+      - postgres-db
+    env_file:
+      - .env
+    environment:
+      # Use the internal compose hostname for Postgres when running in compose
+      DATABASE_URL: "postgresql://user:password@postgres-db:5432/barometre?schema=public"
+      JWT_SECRET: "change_me"
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    # Use a lightweight dev workflow: install deps and start in watch mode
+    command: ["sh", "-c", "npm ci --silent && npm run start:dev"]
+    tty: true
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  # One-shot service to run Prisma migrations/generate inside compose network.
+  # Usage: docker-compose run --rm prisma-init
+  prisma-init:
+    image: node:20-bullseye-slim
+    container_name: burkina-barometre-prisma-init
+    working_dir: /usr/src/app
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - postgres-db
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: "postgresql://user:password@postgres-db:5432/barometre?schema=public"
+    command: ["sh", "-c", "npm ci --silent && npx prisma generate && npx prisma migrate deploy" ]
+
+volumes:
+  postgres_data:

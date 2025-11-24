@@ -1,0 +1,25 @@
+{
+  "name": "burkina-barometre-backend",
+  "description": "API Backend pour le Baromètre des Services Publics du Burkina Faso",
+  "repository": "https://github.com/votre-username/burkina-baro",
+  "logo": "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/BF.svg",
+  "keywords": ["nestjs", "prisma", "postgresql", "burkina-faso"],
+  "image": "heroku/nodejs",
+  "addons": [
+    {
+      "plan": "heroku-postgresql:mini"
+    }
+  ],
+  "env": {
+    "JWT_SECRET": {
+      "description": "Secret key for JWT tokens",
+      "generator": "secret"
+    },
+    "NODE_ENV": {
+      "value": "production"
+    }
+  },
+  "scripts": {
+    "postdeploy": "npx prisma migrate deploy && npm run db:seed"
+  }
+}

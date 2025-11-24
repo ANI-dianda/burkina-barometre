@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Rachid CV</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --background-color: #ecf0f1;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+        }
+		
+		em  
+		{    
+			position: center;  
+			top: 15px;
+			font-size: 1.7em;
+			text-decoration: underline;
+			font-family: "Arial Black", sans-serif;
+			color: var(--secondary-color);
+            margin-bottom: 20px;
+			padding-bottom: 10px;
+		}
+
+        .left-column, .right-column {
+            padding: 40px;
+        }
+
+        .left-column {
+            flex: 2;
+            background: linear-gradient(135deg, #f6f8fa 0%, #e9ecef 100%);
+        }
+
+        .right-column {
+            flex: 1;
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        h1, h2, h3 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .right-column h2 {
+            color: white;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            margin-top: 30px;
+        }
+
+        .profile-pic {
+            width: 260px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 5px solid var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.05);
+        }
+
+        .contact-info, .skills, .languages {
+            margin-bottom: 30px;
+        }
+
+        .skill {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 15px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .skill:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .experience, .education {
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .experience::before, .education::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .file-upload {
+            margin-top: 10px;
+        }
+
+        .file-preview {
+            margin-top: 10px;
+            max-width: 100%;
+            max-height: 200px;
+            overflow: hidden;
+        }
+
+        .contact-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: var(--accent-color);
+        }
+
+        .upload-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            background-color: var(--accent-color);
+        }
+
+        .achievements {
+            margin-top: 30px;
+        }
+
+        .achievement-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .achievement-item:hover {
+            transform: translateX(10px);
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .left-column, .right-column {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="container">
+        <div class="left-column">
+            <h1>Zongo Abdour Rachid</h1>
+            <p><span style="font-family: Courier New;">Date de naissance: Né le 01 Janvier 2000</span></p><br/>
+			<p><em><i class="fas fa-briefcase"></i>Technicien en Informatique et Electricité</em></p>
+            
+            <h2><i class="fas fa-user"></i> Profil personnel</h2>
+            <p><span style="font-family: Times New Roman;">Personne motivée et determinée, dotée d'une solide base éducative et éthique. Mon parcours académique, marqué par l'obtention de mon CEP, BEPC, BEP et CAP, reflète mon engagement envers l'apprentissage et ma capacité à atteindre mes objectifs. Je suis organisé, polyvalent et bien developper en résolution de problèmeet de communication. Mon désir d'apprendre et de m'améliorer constamment me pousse à relever de nouveaux défis avec enthousiasme. Je suis prêt à mettre en oeuvre mes connaissances et compétences pour contribuer de manière positive à tout environnement professionel. </span></p>
+            
+            <h2><i class="fas fa-history"></i>Expériences Professionnelles</h2>
+            <div class="experience">
+                <h3>Certificat d'Etudes Primaires (CEP)</h3>
+                <p><mark>2010 - 2011</mark></p>
+					<p><span style="font-family: Roboto;">J'ai obtenu mon Certificat d'Etudes Primaires(CEP) à l'ecole primaire du nom de Wogodogo, marquant ainsi une étape importante de début de mon parcours éducatif et de mon engagement envers mon éducation. </span></p>
+            </div>
+            <div class="experience">
+                <h3>Breévet d'Etudes du Premier Cycle (BEPC)</h3>
+                <p><mark>2016 - 2017</mark></p>
+                    <p><span style="font-family: Roboto;">Par la suite, j'ai validé mon BEPC (Brevet d'Études du Premier Cycle) démontrant mes compétences au niveau collégial. Une réussite qui a marqué une étape significative a mon parcours et mes compétences académiques. </span></p>
+            </div>
+			<div class="experience">
+                <h3>Brevet d'Études Professionnelles (BEP)</h3>
+                <p><mark>2019 - 2020</mark></p>
+                    <p><span style="font-family: Roboto;">Toujours dans mon parcours acaemique, j'ai obtenu mon BEP (Brevet d'Études Professionnelles) consolidant mes connaissances dans un domaine spécifique. </span></p>
+            </div>
+            <div class="experience">
+                <h3>Certificat d'Aptitude Professionnelle (CAP)</h3>
+                <p><mark>2020 - 2021</mark></p>
+                    <p><span style="font-family: Roboto;">Enfin j'ai obtenu mon CAP (Certificat d'Aptitude Professionnelle) concrétisant ainsi mes éfforts et ma détermination dans mes études et mettant fin a mon parcours au Lycée. </span></p>
+            </div>
+			
+            <h2><i class="fas fa-graduation-cap"></i>Formations</h2>
+            <div class="education">
+				<h3>ZGS-Global Services </h3>
+                <p class="date"><mark>2022-2023 | Formation en électricité à ZGS-GLOBAL SERVICES</mark></p>
+						<ul>
+							<li>Acquisition de compétences en dépannage matériel et logiciel.<br/></li>
+							<li>Apprentissage des réseaux informatiques.<br/></li>
+							<li>Formation sur la maintenance préventive et corrective des équipements informatiques.<br/></li>
+							<li>Développement de compétences en installation et configuration de systèmes d'exploitation.</li>
+						</ul>
+						
+                <h3>Emprint Pro School</h3>
+                <p class="date"><mark>2023 - 2024 | Formation en maintenance informatique à Emprint Pro School</mark></p>
+						<ul>
+							<li>Apprentissage des bases de l'électricité et des circuits électriques.<br/></li>
+							<li>Formation sur la sécurité électrique et les normes en vigueur.<br/></li>
+							<li>Acquisition de compétences en installation électrique résidentielle et commerciale.<br/></li>
+							<li>Développement de connaissances en dépannage et maintenance des équipements électriques.</li>
+						</ul>
+                <p>Ces formations m'ont permis d'acquérir des compétences précieuses dans des domaines techniques essentiels.</p>
+            </div>
+            
+			  <div class="pdf-section">
+                <h2><i class="fas fa-file-pdf"></i> Diplômes et Attestations</h2>
+					<a>
+						<a href="BAC.pdf" class="pdf-link" target="_blank">
+							<i class="fas fa-file-pdf"></i>Diplome CEP(PDF)
+						<a href="BEPC.pdf" class="pdf-link" target="_blank">
+							<i class="fas fa-file-pdf"></i> Diplome BEPC(PDF)
+						<a href="BAC.pdf" class="pdf-link" target="_blank">
+							<i class="fas fa-file-pdf"></i> Diplome BEP(PDF)
+						<a href="BADGE.pdf" class="pdf-link" target="_blank">
+							<i class="fas fa-file-pdf"></i> Diplome CAP(PDF)
+						<a href="Attestation.pdf" class="pdf-link" target="_blank">
+							<i class="fas fa-file-pdf"></i> Attestation Maintenance Informatique(PDF)
+                    </a>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <img src="Rachid.jpg" alt="Photo de profil" class="profile-pic">
+
+            <div class="contact-info">
+                <h2><i class="fas fa-address-card"></i> Coordonnées</h2>
+                <a href="mailto:rachidzongo2000@gmail.com" title="Envoyez-moi un e-mail !">
+					<p><i class="fas fa-envelope"></i>  rachidzongo2000@gmail.com</p>
+				</a>
+				<a href="https://wa.me/22673549492" title="Envoyez-moi un message WhatsApp">
+					<p><i class="fab fa-whatsapp"></i>  +226 73 54 94 92</p>
+				</a>
+                <a href="12,37181°N, 1,55570°O" title="Cliquez pour voir ma localisation">
+						<p><i class="fas fa-map-marker-alt"></i>  Ouagadougou, Burkina Faso Rue 10.03</p>
+				</a>
+				
+            </div>
+            
+            <div class="skills">
+                <h2><i class="fas fa-cogs"></i> Compétences</h2>
+                <span class="skill">Créativité</span>
+                <span class="skill">Organisation</span>
+                <span class="skill">Communication</span>
+                <span class="skill">Leadership</span>
+                <span class="skill">Collaboration</span>
+                <span class="skill">Résilience</span>
+            </div>
+			
+             <div class="interests">
+                <h2><i class="fas fa-heart"></i> Centres d'intérêt</h2>
+                <ul>
+					<li><i class="fas fa-running"></i> Sport</li>
+                    <li><i class="fas fa-landmark"></i> Histoire</li>
+                    <li><i class="fas fa-plane"></i> Voyage</li>
+					<li><i class="fas fa-tshirt"></i> Mode</li>
+                    <li><i class="fas fa-music"></i> Musique</li>
+                    <li><i class="fas fa-mountain"></i> Aventure</li>
+					<li><i class="fas fa-book"></i> Lecture</li>
+                    <li><i class="fas fa-utensils"></i> Cuisine</li>
+                    <li><i class="fas fa-camera"></i> Photographie</li>
+                </ul>
+            </div>
+			 <div class="languages">
+                <h2><i class="fas fa-language"></i> Langues</h2>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Français - Courant</li>
+                    <li><i class="fas fa-check-circle"></i> Anglais - Intermédiaire</li>
+                </ul>
+            </div>
+			            <h2>Réalisations</h2>
+            <div class="achievements">
+                <div class="achievement-item">
+                    <p>Permis de conduire (poids lourd)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        function uploadFile(inputId) {
+            const fileInput = document.getElementById(inputId);
+            const file = fileInput.files[0];
+            const previewId = inputId.replace('File', 'Preview');
+            const previewDiv = document.getElementById(previewId);
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    if (file.type === 'application/pdf') {
+                        previewDiv.innerHTML = `<embed src="${e.target.result}" type="application/pdf" width="100%" height="200px">`;
+                    } else {
+                        previewDiv.innerHTML = `<img src="${e.target.result}" alt="Uploaded file" style="max-width: 100%; max-height: 200px;">`;
+                    }
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert(`Veuillez sélectionner un fichier valide.`);
+            }
+        }
+
+        // Animation pour les compétences
+        document.querySelectorAll('.skill').forEach(skill => {
+            skill.addEventListener('mouseover', () => {
+                skill.style.transform = 'scale(1.1) rotate(5deg)';
+            });
+            skill.addEventListener('mouseout', () => {
+                skill.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Configuration de particles.js
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#3498db' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#3498db', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 6, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+
+        // Fonction pour ajouter un effet de survol sur les éléments d'expérience et d'éducation
+        function addHoverEffect() {
+            const items = document.querySelectorAll('.experience, .education');
+            items.forEach(item => {
+                item.addEventListener('mouseover', () => {
+                    item.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+                    item.style.transform = 'translateY(-5px)';
+                });
+                item.addEventListener('mouseout', () => {
+                    item.style.boxShadow = 'none';
+                    item.style.transform = 'translateY(0)';
+                });
+            });
+        }
+
+        // Appeler la fonction pour ajouter l'effet de survol
+        addHoverEffect();
+    </script>
+</body>
+</html>
