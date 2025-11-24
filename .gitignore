@@ -22,6 +22,7 @@ logs/
 # IDE
 .vscode/
 .idea/
+.continue/
 
 # OS
 .DS_Store
@@ -33,3 +34,9 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+
+# Secrets and API keys
+*.key
+*.pem
+config.yaml
+new-config*.yaml
