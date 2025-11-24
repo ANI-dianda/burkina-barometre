@@ -6,8 +6,8 @@ WORKDIR /app
 COPY package*.json ./
 COPY prisma ./prisma/
 
-# Installer les dépendances
-RUN npm ci --only=production
+# Installer TOUTES les dépendances (dev incluses pour le build)
+RUN npm ci
 
 # Copier le code source
 COPY . .
@@ -17,6 +17,9 @@ RUN npx prisma generate
 
 # Construire l'application
 RUN npm run build
+
+# Supprimer les dev dependencies après le build
+RUN npm prune --production
 
 # Exposer le port
 EXPOSE 3000
