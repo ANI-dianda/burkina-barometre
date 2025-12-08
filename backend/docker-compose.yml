@@ -18,10 +18,8 @@ services:
     restart: on-failure
     depends_on:
       - postgres-db
-    environment:
-      # This will be used by the app; override with a .env file or env vars in production
-      DATABASE_URL: "postgresql://user:password@postgres-db:5432/barometre?schema=public"
-      JWT_SECRET: "change_me"
+    env_file:
+      - .env
     ports:
       - '3000:3000'
     # In dev you may want to mount the source; commented out by default
@@ -38,10 +36,6 @@ services:
       - postgres-db
     env_file:
       - .env
-    environment:
-      # Use the internal compose hostname for Postgres when running in compose
-      DATABASE_URL: "postgresql://user:password@postgres-db:5432/barometre?schema=public"
-      JWT_SECRET: "change_me"
     ports:
       - '3000:3000'
     volumes:
@@ -69,8 +63,6 @@ services:
       - postgres-db
     env_file:
       - .env
-    environment:
-      DATABASE_URL: "postgresql://user:password@postgres-db:5432/barometre?schema=public"
     command: ["sh", "-c", "npm ci --silent && npx prisma generate && npx prisma migrate deploy" ]
 
 volumes:
