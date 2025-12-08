@@ -12,7 +12,7 @@ import { JwtStrategy } from './strategy/jwt.strategy';
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
+      useFactory: (configService: ConfigService) => ({
         // Require JWT_SECRET to be explicitly set in environment.
         secret: (() => {
           const s = configService.get<string>('JWT_SECRET');

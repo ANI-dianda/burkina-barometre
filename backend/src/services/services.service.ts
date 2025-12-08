@@ -15,8 +15,8 @@ export class ServicesService {
   }
 
   findAll(searchDto?: SearchServicesDto) {
-    const where: any = {};
-    const orderBy: any = {};
+    const where: Record<string, any> = {};
+    const orderBy: Record<string, 'asc' | 'desc'> = {};
 
     if (searchDto?.name) {
       where.name = { contains: searchDto.name, mode: 'insensitive' };

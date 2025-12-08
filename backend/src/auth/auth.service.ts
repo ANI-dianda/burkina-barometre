@@ -16,7 +16,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async register(phoneNumber: string): Promise<{ message: string }> {
+  register(phoneNumber: string): { message: string } {
     if (!this.isValidPhoneNumber(phoneNumber)) {
       throw new BadRequestException('Numéro de téléphone invalide');
     }

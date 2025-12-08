@@ -30,8 +30,10 @@ async function bootstrap() {
   app.setGlobalPrefix('api/v1');
 
   const port = process.env.PORT || 0;
-  const server = await app.listen(port, '0.0.0.0');
-  const actualPort = server.address().port;
+  await app.listen(port, '0.0.0.0');
+  const actualPort =
+    Number(process.env.PORT) ||
+    (typeof port === 'number' ? port : Number(port) || 3000);
 
   logger.log(
     `🚀 Application démarrée sur http://localhost:${actualPort}/api/v1`,
