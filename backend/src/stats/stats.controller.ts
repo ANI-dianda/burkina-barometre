@@ -17,7 +17,9 @@ export class StatsController {
 
   @Get('services/most-reviewed')
   getMostReviewedServices(@Query('limit') limit?: string) {
-    return this.statsService.getMostReviewedServices(limit ? parseInt(limit) : 10);
+    return this.statsService.getMostReviewedServices(
+      limit ? parseInt(limit) : 10,
+    );
   }
 
   @Get('administrations/performance')

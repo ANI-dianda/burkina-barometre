@@ -1,0 +1,17 @@
+name: Gitleaks Pull Request Scan
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Gitleaks scan
+        uses: zricethezav/gitleaks-action@v1.3.0
+        with:
+          args: '--path=.'
