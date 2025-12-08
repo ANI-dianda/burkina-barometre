@@ -65,7 +65,7 @@ export class StatsService {
       take: limit,
     });
 
-    return services.filter(service => service._count.avis > 0);
+    return services.filter((service) => service._count.avis > 0);
   }
 
   async getAdministrationPerformance() {
@@ -79,12 +79,19 @@ export class StatsService {
       },
     });
 
-    return administrations.map(admin => {
+    return administrations.map((admin) => {
       const totalServices = admin.services.length;
-      const totalAvis = admin.services.reduce((sum, service) => sum + service._count.avis, 0);
-      const averageScore = admin.services.length > 0 
-        ? admin.services.reduce((sum, service) => sum + service.currentScore, 0) / admin.services.length
-        : 0;
+      const totalAvis = admin.services.reduce(
+        (sum, service) => sum + service._count.avis,
+        0,
+      );
+      const averageScore =
+        admin.services.length > 0
+          ? admin.services.reduce(
+              (sum, service) => sum + service.currentScore,
+              0,
+            ) / admin.services.length
+          : 0;
 
       return {
         id: admin.id,

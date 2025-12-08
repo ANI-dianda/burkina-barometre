@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  UnauthorizedException,
+  BadRequestException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
@@ -12,18 +16,18 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async register(phoneNumber: string): Promise<{ message: string }> {
+  register(phoneNumber: string): { message: string } {
     if (!this.isValidPhoneNumber(phoneNumber)) {
       throw new BadRequestException('Numéro de téléphone invalide');
     }
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const expires = new Date(Date.now() + 5 * 60 * 1000);
-    
+
     this.otpStorage.set(phoneNumber, { otp, expires });
-    
+
     console.log(`[AUTH-DEBUG] OTP pour ${phoneNumber} est : ${otp}`);
-    
+
     return {
       message: 'OTP envoyé avec succès. Il est valide pour 5 minutes.',
     };
@@ -35,8 +39,11 @@ export class AuthService {
   ): Promise<{ accessToken: string; user: any }> {
     const storedOtp = this.otpStorage.get(phoneNumber);
     const isTestOtp = otp === '123456';
-    
-    if (!isTestOtp && (!storedOtp || storedOtp.otp !== otp || storedOtp.expires < new Date())) {
+
+    if (
+      !isTestOtp &&
+      (!storedOtp || storedOtp.otp !== otp || storedOtp.expires < new Date())
+    ) {
       throw new UnauthorizedException('Code OTP invalide ou expiré.');
     }
 
@@ -46,7 +53,7 @@ export class AuthService {
 
     const normalizedPhone = this.normalizePhoneNumber(phoneNumber);
     const phoneNumberHash = await bcrypt.hash(normalizedPhone, 10);
-    
+
     let user = await this.prisma.user.findFirst();
 
     if (!user) {
@@ -57,9 +64,9 @@ export class AuthService {
 
     const payload = { sub: user.id, role: user.role };
     const accessToken = await this.jwtService.signAsync(payload);
-    
-    return { 
-      accessToken, 
+
+    return {
+      accessToken,
       user: {
         id: user.id,
         role: user.role,

@@ -12,8 +12,15 @@ import { JwtStrategy } from './strategy/jwt.strategy';
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
-        secret: configService.get<string>('JWT_SECRET') || 'fallback-secret-key',
+      useFactory: (configService: ConfigService) => ({
+        // Require JWT_SECRET to be explicitly set in environment.
+        secret: (() => {
+          const s = configService.get<string>('JWT_SECRET');
+          if (!s) {
+            throw new Error('JWT_SECRET environment variable is required');
+          }
+          return s;
+        })(),
         signOptions: { expiresIn: '7d' },
       }),
       inject: [ConfigService],

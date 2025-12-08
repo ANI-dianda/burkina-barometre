@@ -56,3 +56,7 @@ pids
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 /generated/prisma
+
+# Ignore local Continue AI config (may live in the user's home)
+/.continue/
+.continue/

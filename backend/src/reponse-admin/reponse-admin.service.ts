@@ -13,7 +13,9 @@ export class ReponseAdminService {
     });
 
     if (!admin || (admin.role !== 'ADMIN' && admin.role !== 'MODERATOR')) {
-      throw new ForbiddenException('Seuls les admins peuvent répondre aux avis');
+      throw new ForbiddenException(
+        'Seuls les admins peuvent répondre aux avis',
+      );
     }
 
     return this.prisma.reponseAdmin.create({

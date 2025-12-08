@@ -118,6 +118,8 @@ copy .env.example .env
 # then edit .env
 ```
 
+Note: The `.env.example` contains development defaults. You must set a strong `JWT_SECRET` and a secure `DATABASE_URL` for staging/production. Avoid committing the real `.env` file.
+
 3. Start dev server (hot reload)
 
 ```powershell
